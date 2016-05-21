@@ -6,5 +6,5 @@ Popular Movies android app for project submission in android nanodegree program 
 <li>Material Design Implementation</li>
 <li>Multiscreen Tablet support</li>
 <li>Content Providers</li>
-<li>MVP Architechture Implmentation</li>
+<li>MVP Architecture Implmentation</li>
 </ol>
