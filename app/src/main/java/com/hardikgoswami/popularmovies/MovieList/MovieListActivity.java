@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.hardikgoswami.popularmovies.MovieDetail.MovieDetailActivity;
+import com.hardikgoswami.popularmovies.MovieDetail.MovieDetailFragmentImpView;
 import com.hardikgoswami.popularmovies.R;
 
 public class MovieListActivity extends AppCompatActivity  {
@@ -19,6 +20,18 @@ public class MovieListActivity extends AppCompatActivity  {
         mIsDualPane = detailView != null &&
                 detailView.getVisibility() == View.VISIBLE;
         Toast.makeText(this,"misDual pane : "+mIsDualPane,Toast.LENGTH_SHORT).show();
+        if(mIsDualPane){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.movies_grid_container,new MovieListFragmentImplView())
+                    .commit();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.movies_detail_container,new MovieDetailFragmentImpView())
+                    .commit();
+        }else {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.single_movies_list_container,new MovieListFragmentImplView())
+                    .commit();
+        }
     }
 
 }

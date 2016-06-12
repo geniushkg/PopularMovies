@@ -23,7 +23,7 @@ public class MovieDetailFragmentImpView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_movie_detail_fragment_imp_view,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_movie_detail_fragment_imp_view, container, false);
 
         return rootView;
     }
