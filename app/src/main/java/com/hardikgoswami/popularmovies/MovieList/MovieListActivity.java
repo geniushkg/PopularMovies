@@ -1,13 +1,11 @@
-package com.hardikgoswami.popularmovies.MovieList;
+package com.hardikgoswami.popularmovies.movielist;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hardikgoswami.popularmovies.MovieDetail.MovieDetailActivity;
-import com.hardikgoswami.popularmovies.MovieDetail.MovieDetailFragmentImpView;
+import com.hardikgoswami.popularmovies.moviedetail.MovieDetailFragmentImpView;
 import com.hardikgoswami.popularmovies.R;
 
 public class MovieListActivity extends AppCompatActivity  {

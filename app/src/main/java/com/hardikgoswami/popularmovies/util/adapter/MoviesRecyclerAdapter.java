@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,9 +44,13 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
         Picasso.with(context)
                 .load(poster_url)
                 .into(holder.poster);
-
+        animate(holder);
     }
 
+    public void animate(RecyclerView.ViewHolder viewHolder) {
+        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.bounce_interpolator);
+        viewHolder.itemView.setAnimation(animAnticipateOvershoot);
+    }
 
     @Override
     public int getItemCount() {

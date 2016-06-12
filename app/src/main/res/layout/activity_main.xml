@@ -7,6 +7,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MovieList.MovieListActivity"
+    tools:context=".movielist.MovieListActivity"
     android:id="@+id/single_movies_list_container">
 </FrameLayout>

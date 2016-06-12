@@ -1,4 +1,4 @@
-package com.hardikgoswami.popularmovies.MovieDetail;
+package com.hardikgoswami.popularmovies.moviedetail;
 
 
 import android.os.Bundle;

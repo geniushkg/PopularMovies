@@ -8,14 +8,14 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MovieList.MovieListActivity">
+        <activity android:name=".movielist.MovieListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MovieDetail.MovieDetailActivity"></activity>
+        <activity android:name=".moviedetail.MovieDetailActivity"></activity>
     </application>
 
 </manifest>
