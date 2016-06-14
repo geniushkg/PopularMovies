@@ -1,6 +1,8 @@
 
 package com.hardikgoswami.popularmovies.util.entity;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Map;
  * Created by geniushkg on 6/12/2016.
  */
 
-
+@Parcel
 public class MovieEntity {
 
 

@@ -1,6 +1,9 @@
 package com.hardikgoswami.popularmovies;
 
 import android.app.Application;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.hardikgoswami.popularmovies.util.net.TheMovieDbService;
 
@@ -29,5 +32,16 @@ public class PopularMovieApplication extends Application {
             throw new NullPointerException("Service Null");
         }
         return sService;
+    }
+    public static boolean isNetworkStatusAvialable (Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null)
+        {
+            NetworkInfo netInfos = connectivityManager.getActiveNetworkInfo();
+            if(netInfos != null)
+                if(netInfos.isConnected())
+                    return true;
+        }
+        return false;
     }
 }

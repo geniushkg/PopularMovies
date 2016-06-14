@@ -23,6 +23,5 @@ public class view_holder extends RecyclerView.ViewHolder {
         poster = (ImageView) itemView.findViewById(R.id.image_row_movielist);
         rating = (TextView) itemView.findViewById(R.id.text_row_movielist_rating);
         title = (TextView) itemView.findViewById(R.id.text_row_movielist_title);
-
     }
 }

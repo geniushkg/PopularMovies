@@ -26,7 +26,6 @@ public class MovieService implements MovieServiceInterface {
 
         } else if (filter.equalsIgnoreCase("popular")) {
 
-            callBack.onFailure("popular ");// will be called on failure of service
             Call<RestResult> movieEntityCall = PopularMovieApplication.getsService().getPopularMovies(PopularMovieApplication.TMDB_API_KEY);
             movieEntityCall.enqueue(new Callback<RestResult>() {
                 @Override
@@ -47,7 +46,6 @@ public class MovieService implements MovieServiceInterface {
 
         } else {
 
-            callBack.onFailure("top rated");// will be called on failure of service
             Call<RestResult> movieEntityCall = PopularMovieApplication.getsService().getTopRatedMovies(PopularMovieApplication.TMDB_API_KEY);
             movieEntityCall.enqueue(new Callback<RestResult>() {
                 @Override
@@ -59,7 +57,6 @@ public class MovieService implements MovieServiceInterface {
                         callBack.onFailure("response not sucess");
                     }
                 }
-
                 @Override
                 public void onFailure(Call<RestResult> call, Throwable t) {
                     callBack.onFailure("onFailure message : " + t.getMessage());

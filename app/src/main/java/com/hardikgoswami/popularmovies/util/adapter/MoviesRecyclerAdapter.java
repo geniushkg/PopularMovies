@@ -1,6 +1,7 @@
 package com.hardikgoswami.popularmovies.util.adapter;
 
 import com.hardikgoswami.popularmovies.R;
+import com.hardikgoswami.popularmovies.movielist.iMovieListPresenter;
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import com.squareup.picasso.Picasso;
 
@@ -24,10 +25,13 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
 
     List<MovieEntity> movieEntityList = Collections.emptyList();
     Context context;
+    iMovieListPresenter movieListPresenter;
+    MovieEntity parcleMovie;
 
-    public MoviesRecyclerAdapter(List<MovieEntity> movieList, Context context) {
+    public MoviesRecyclerAdapter(List<MovieEntity> movieList, Context context,iMovieListPresenter presenter) {
         this.movieEntityList = movieList;
         this.context = context;
+        this.movieListPresenter=presenter;
     }
 
     @Override
@@ -38,13 +42,20 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
     }
 
     @Override
-    public void onBindViewHolder(view_holder holder, int position) {
+    public void onBindViewHolder(view_holder holder, final int position) {
         holder.title.setText(movieEntityList.get(position).getOriginal_title());
         holder.rating.setText(String.valueOf(movieEntityList.get(position).getVote_count()));
         String poster_url ="http://image.tmdb.org/t/p/w185"+ movieEntityList.get(position).getPoster_path();
         Picasso.with(context)
                 .load(poster_url)
                 .into(holder.poster);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parcleMovie = (MovieEntity) movieEntityList.get(position);
+                movieListPresenter.navigateToMovieDetail(parcleMovie);
+            }
+        });
        // animate(holder);
     }
 
