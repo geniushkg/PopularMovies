@@ -30,7 +30,7 @@ public class MovieEntity {
     private Integer vote_count;
     private Boolean video;
     private Double vote_average;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      *
@@ -284,12 +284,5 @@ public class MovieEntity {
         this.vote_average = vote_average;
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

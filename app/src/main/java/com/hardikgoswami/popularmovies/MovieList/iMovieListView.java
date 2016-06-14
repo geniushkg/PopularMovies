@@ -16,5 +16,5 @@ public interface iMovieListView {
 
     void loadMovies(List<MovieEntity> movieEntities);
 
-    void navigateToMovieDetailsView();
+    void navigateToMovieDetailsView(MovieEntity parcelMovie);
 }

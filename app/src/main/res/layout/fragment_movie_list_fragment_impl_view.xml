@@ -9,7 +9,7 @@
         android:id="@+id/moviesloadingIndicatorView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
         android:visibility="gone"
         app:indicator="BallClipRotatePulse"
         app:indicator_color="@color/colorPrimary" />

@@ -24,10 +24,14 @@ public class MovieListImplPresenter implements iMovieListPresenter, IListener<Li
     }
 
     @Override
+    public void navigateToMovieDetail(MovieEntity parcelMovie) {
+        iMovieListView.navigateToMovieDetailsView(parcelMovie);
+    }
+
+    @Override
     public void onSuccess(List<MovieEntity> movieEntities) {
         iMovieListView.hideLoadingMoviesView();
         iMovieListView.loadMovies(movieEntities);
-
     }
 
     @Override
@@ -35,4 +39,6 @@ public class MovieListImplPresenter implements iMovieListPresenter, IListener<Li
         iMovieListView.hideLoadingMoviesView();
         iMovieListView.showMessage(errorMessage);
     }
+
+
 }
