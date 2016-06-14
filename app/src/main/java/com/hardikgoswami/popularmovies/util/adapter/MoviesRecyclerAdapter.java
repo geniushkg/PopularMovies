@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by geniushkg on 6/12/2016.
@@ -39,18 +40,18 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
     @Override
     public void onBindViewHolder(view_holder holder, int position) {
         holder.title.setText(movieEntityList.get(position).getOriginal_title());
-        holder.rating.setText(movieEntityList.get(position).getVote_count());
+        holder.rating.setText(String.valueOf(movieEntityList.get(position).getVote_count()));
         String poster_url ="http://image.tmdb.org/t/p/w185"+ movieEntityList.get(position).getPoster_path();
         Picasso.with(context)
                 .load(poster_url)
                 .into(holder.poster);
-        animate(holder);
+       // animate(holder);
     }
 
-    public void animate(RecyclerView.ViewHolder viewHolder) {
-        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.bounce_interpolator);
-        viewHolder.itemView.setAnimation(animAnticipateOvershoot);
-    }
+//    public void animate(RecyclerView.ViewHolder viewHolder) {
+//        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.bounce_interpolator);
+//        viewHolder.itemView.setAnimation(animAnticipateOvershoot);
+//    }
 
     @Override
     public int getItemCount() {

@@ -1,15 +1,29 @@
 package com.hardikgoswami.popularmovies.movielist;
 
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.hardikgoswami.popularmovies.moviedetail.MovieDetailFragmentImpView;
 import com.hardikgoswami.popularmovies.R;
 
+import butterknife.BindView;
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 public class MovieListActivity extends AppCompatActivity  {
     private boolean mIsDualPane;
+
+    MaterialSpinner materialSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,19 +31,19 @@ public class MovieListActivity extends AppCompatActivity  {
         View detailView = findViewById(R.id.movies_detail_container);
         mIsDualPane = detailView != null &&
                 detailView.getVisibility() == View.VISIBLE;
-        Toast.makeText(this,"misDual pane : "+mIsDualPane,Toast.LENGTH_SHORT).show();
-        if(mIsDualPane){
+        Toast.makeText(this, "misDual pane : " + mIsDualPane, Toast.LENGTH_SHORT).show();
+        if (mIsDualPane) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.movies_grid_container,new MovieListFragmentImplView())
+                    .replace(R.id.movies_grid_container, new MovieListFragmentImplView())
                     .commit();
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.movies_detail_container,new MovieDetailFragmentImpView())
+                    .replace(R.id.movies_detail_container, new MovieDetailFragmentImpView())
                     .commit();
-        }else {
+        } else {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.single_movies_list_container,new MovieListFragmentImplView())
+                    .replace(R.id.single_movies_list_container, new MovieListFragmentImplView())
                     .commit();
+
         }
     }
-
 }

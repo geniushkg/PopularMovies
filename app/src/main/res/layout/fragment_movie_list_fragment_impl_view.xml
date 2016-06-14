@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.hardikgoswami.popularmovies.movielist.MovieListFragmentImplView">
-
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/moviesloadingIndicatorView"
         android:layout_width="wrap_content"
@@ -14,10 +13,8 @@
         android:visibility="gone"
         app:indicator="BallPulse"
         app:indicator_color="@color/colorPrimary" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview_movieslist_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
 </LinearLayout>
