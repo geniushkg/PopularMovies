@@ -8,6 +8,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -47,6 +48,7 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
     MoviesRecyclerAdapter moviesRecyclerAdapter;
     Context mContext;
     List<MovieEntity> movieEntitiesEmpty;
+    int numOfColoums = 2;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,8 +66,7 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
         movieEntitiesEmpty = new ArrayList<>();
         moviesRecyclerAdapter = new MoviesRecyclerAdapter(movieEntitiesEmpty, mContext,movieListPresenterInterface);
         recyclerView.setAdapter(moviesRecyclerAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumnsForOrientation()));
         if(PopularMovieApplication.isNetworkStatusAvialable(mContext)) {
             updateAdapterData();
         } else {
@@ -104,7 +105,9 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
              dualPane = movieListActivity.isDualPane();
         }
         if(dualPane){
-            movieListActivity.updateUi(parcelMovie);
+       // TODO : remove this comment
+            //     movieListActivity.updateUi(parcelMovie);
+            Toast.makeText(getContext(),"updates ui :"+parcelMovie.getOriginal_title(),Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -167,16 +170,36 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
                 showMessage("Sorting Error");
                 break;
             }
-
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        Toast.makeText(getContext(), "nothing selected", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Nothing selected", Toast.LENGTH_SHORT).show();
     }
 
     public enum sortOrder {
         TOP_RATED, POPULAR, OFFLINE
+    }
+
+    public int numOfColumnsForOrientation(){
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        int width = display.getWidth();
+        int height = display.getHeight();
+
+        if(width<height){
+            // portrait mode
+            numOfColoums = 2;
+            if(width>600){
+                numOfColoums = 4;
+            }
+        }
+        else{
+            numOfColoums = 3;
+            if(width>600){
+                numOfColoums = 2;
+            }
+        }
+        return numOfColoums;
     }
 }

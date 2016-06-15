@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by geniushkg on 5/29/2016.
  */
-public class PopularMovieApplication extends Application {
+public class PopularMovieApplication extends Application  {
     public static final String BASE_URL ="http://api.themoviedb.org/3/";
     public static final String TMDB_API_KEY = BuildConfig.TMDB_API;
     private static TheMovieDbService sService;

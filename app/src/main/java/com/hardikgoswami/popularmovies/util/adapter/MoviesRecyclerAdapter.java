@@ -56,13 +56,9 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
                 movieListPresenter.navigateToMovieDetail(parcleMovie);
             }
         });
-       // animate(holder);
     }
 
-//    public void animate(RecyclerView.ViewHolder viewHolder) {
-//        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.bounce_interpolator);
-//        viewHolder.itemView.setAnimation(animAnticipateOvershoot);
-//    }
+
 
     @Override
     public int getItemCount() {
