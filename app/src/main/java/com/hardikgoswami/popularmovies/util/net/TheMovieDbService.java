@@ -1,5 +1,6 @@
 package com.hardikgoswami.popularmovies.util.net;
 
+import com.hardikgoswami.popularmovies.util.entity.MovieTrailerResult;
 import com.hardikgoswami.popularmovies.util.entity.RestResult;
 
 import retrofit2.Call;
@@ -16,5 +17,8 @@ public interface TheMovieDbService {
 
     @GET("movie/top_rated")
     Call<RestResult> getTopRatedMovies(@Query("api_key") String api_key);
+
+    @GET("movie/{id}/videos")
+    Call<MovieTrailerResult> getTrailersOfMovie(@Query("api_key") String api_key)
 
 }

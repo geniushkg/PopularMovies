@@ -1,5 +1,6 @@
 package com.hardikgoswami.popularmovies.movielist;
 
+import com.hardikgoswami.popularmovies.R;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.widget.Toast;
 
 import com.hardikgoswami.popularmovies.moviedetail.MovieDetailActivity;
 import com.hardikgoswami.popularmovies.moviedetail.MovieDetailFragmentImpView;
-import com.hardikgoswami.popularmovies.R;
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 
 import org.parceler.Parcels;
@@ -52,9 +52,6 @@ public class MovieListActivity extends AppCompatActivity   {
         if(mIsDualPane){
             MovieDetailFragmentImpView movieFragment = (MovieDetailFragmentImpView) getSupportFragmentManager().findFragmentByTag("Detail_frag");
             movieFragment.displayMovieData(parcelData);
-         //   movieDetailFragmentImpView.displayMovieData(parcelData);
-            // TODO: remove this comment
-            Toast.makeText(this,"this is from activity update ui method : "+parcelData.getOriginal_title(),Toast.LENGTH_SHORT).show();
         }else {
             Intent intent = new Intent(this, MovieDetailActivity.class);
             intent.putExtra("movieParcel", Parcels.wrap(parcelData));
