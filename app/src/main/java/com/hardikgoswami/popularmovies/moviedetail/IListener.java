@@ -6,7 +6,10 @@ package com.hardikgoswami.popularmovies.moviedetail;
 
 public interface IListener<T> {
 
-    void onSuccess(T t);
+    void onSuccessReviews(T t);
+
+    void onSuccessTrailers(T t);
 
     void onFailure(String errorMessage);
+
 }

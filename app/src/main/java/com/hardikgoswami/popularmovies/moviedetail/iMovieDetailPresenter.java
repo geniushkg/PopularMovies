@@ -6,4 +6,6 @@ package com.hardikgoswami.popularmovies.moviedetail;
 public interface iMovieDetailPresenter {
     void fetchReviews(int movieId);
     void fetchTrailers(int movieId);
+    void playTrailer(String key);
+    // method to store movie details for offline viewing
 }
