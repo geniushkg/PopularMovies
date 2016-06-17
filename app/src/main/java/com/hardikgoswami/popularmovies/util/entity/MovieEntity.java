@@ -29,6 +29,15 @@ public class MovieEntity {
     private Integer vote_count;
     private Boolean video;
     private Double vote_average;
+    private byte[] poster_blob;
+
+    public byte[] getPoster_blob() {
+        return poster_blob;
+    }
+
+    public void setPoster_blob(byte[] poster_blob) {
+        this.poster_blob = poster_blob;
+    }
 
     /**
      *

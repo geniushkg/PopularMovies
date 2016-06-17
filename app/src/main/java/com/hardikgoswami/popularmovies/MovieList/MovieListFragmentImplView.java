@@ -163,7 +163,7 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
                 break;
             }
             case OFFLINE: {
-                movieListPresenterInterface.fetchMovies("favourite");
+                movieListPresenterInterface.fetchMoviesFavourite(getContext());
                 break;
             }
             default: {

@@ -7,4 +7,5 @@
     <dimen name="font_size">25sp</dimen>
     <dimen name="recycler_view_review_margin">10dp</dimen>
     <dimen name="recycler_view_review_height">160dp</dimen>
+    <dimen name="font_title_grid">12sp</dimen>
 </resources>

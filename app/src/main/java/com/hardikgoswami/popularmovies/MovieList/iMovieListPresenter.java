@@ -1,5 +1,7 @@
 package com.hardikgoswami.popularmovies.movielist;
 
+import android.content.Context;
+
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 
 /**
@@ -7,5 +9,6 @@ import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
  */
 public interface iMovieListPresenter {
  void fetchMovies(String filter);
+ void fetchMoviesFavourite(Context mContext);
  void navigateToMovieDetail(MovieEntity parcelMovie);
 }

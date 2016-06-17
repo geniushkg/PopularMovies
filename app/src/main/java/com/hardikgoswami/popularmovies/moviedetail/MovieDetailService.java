@@ -1,9 +1,13 @@
 package com.hardikgoswami.popularmovies.moviedetail;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 
 import com.hardikgoswami.popularmovies.PopularMovieApplication;
-import com.hardikgoswami.popularmovies.util.db.MovieContentProvider;
+import com.hardikgoswami.popularmovies.movielist.IListener;
+import com.hardikgoswami.popularmovies.util.db.DbBitmapUtility;
 import com.hardikgoswami.popularmovies.util.db.MovieContract;
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import com.hardikgoswami.popularmovies.util.entity.MovieReview;
@@ -40,7 +44,7 @@ public class MovieDetailService implements MovieDetailServieInterface {
 
             @Override
             public void onFailure(Call<MovieReviewResult> call, Throwable t) {
-                callback.onFailure("failed : " + t.getMessage());
+                //   callback.onFailure("failed : " + t.getMessage());
             }
         });
     }
@@ -63,21 +67,40 @@ public class MovieDetailService implements MovieDetailServieInterface {
 
             @Override
             public void onFailure(Call<MovieTrailerResult> call, Throwable t) {
-                callback.onFailure("failed : " + t.getMessage());
+                // callback.onFailure("failed : " + t.getMessage());
             }
         });
     }
 
+
     @Override
-    public void storeMovieToDb(MovieEntity favouriteMovie) {
-        ContentValues values = new ContentValues();
-        values.put(MovieContract.MOVIE_ID,favouriteMovie.getId());
-        values.put(MovieContract.TITLE_MOVIE,favouriteMovie.getTitle());
-        values.put(MovieContract.RELEASE_DATE,favouriteMovie.getRelease_date());
-        values.put(MovieContract.PLOT_MOVIE,favouriteMovie.getOverview());
-        values.put(MovieContract.VOTE_AVG_COLOUMN,favouriteMovie.getVote_average());
-        getContentResolver().insert(SampleContentProvider.Person.CONTENT_URI, values);
+    public void storeMovieToDb(MovieEntity favouriteMovie, Bitmap poster, Context context , IListener callback) {
+        if (checkMovie(favouriteMovie,context)) {
+            ContentValues values = new ContentValues();
+            values.put(MovieContract.MOVIE_ID, favouriteMovie.getId());
+            values.put(MovieContract.TITLE_MOVIE, favouriteMovie.getTitle());
+            values.put(MovieContract.RELEASE_DATE, favouriteMovie.getRelease_date());
+            values.put(MovieContract.PLOT_MOVIE, favouriteMovie.getOverview());
+            values.put(MovieContract.VOTE_AVG_COLOUMN, favouriteMovie.getVote_average());
+            values.put(MovieContract.POSTER_MOVIE, DbBitmapUtility.getBytes(poster));
+            context.getContentResolver().insert(MovieContract.CONTENT_URI, values);
+            callback.onFailure("Added to Favourite");
+        } else {
+            callback.onFailure("Already Favourite");
+        }
     }
+
+    boolean checkMovie(MovieEntity favouriteMovie,Context context) {
+        String[] column = new String[]{"title_movie"};
+        String titleToBeSearch = favouriteMovie.getTitle();
+        Cursor mCursor =  context.getContentResolver()
+                .query(MovieContract.CONTENT_URI,column, "title_movie LIKE ?", new String[]{titleToBeSearch}, null);
+        if(mCursor == null){
+            return true;
+        }
+        return false;
+    }
+
 
 }
 

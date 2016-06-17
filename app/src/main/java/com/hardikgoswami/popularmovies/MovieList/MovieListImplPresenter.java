@@ -1,5 +1,7 @@
 package com.hardikgoswami.popularmovies.movielist;
 
+import android.content.Context;
+
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 
 import java.util.List;
@@ -21,6 +23,12 @@ public class MovieListImplPresenter implements iMovieListPresenter, IListener<Li
     public void fetchMovies(String filter) {
         iMovieListView.showLoadingMoviesView();
         movieServiceInterface.fetchMoviesFromSource(filter, this);
+    }
+
+    @Override
+    public void fetchMoviesFavourite(Context mContext) {
+        iMovieListView.showLoadingMoviesView();
+        movieServiceInterface.fetchFavouriteMovies(this,mContext);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.hardikgoswami.popularmovies.movielist;
 
+import android.content.Context;
+
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import java.util.List;
 
@@ -8,4 +10,5 @@ import java.util.List;
  */
 public interface  MovieServiceInterface {
     void fetchMoviesFromSource(String filter, IListener<List<MovieEntity>> callBack);
+    void fetchFavouriteMovies(IListener<List<MovieEntity>> callBack, Context context);
 }

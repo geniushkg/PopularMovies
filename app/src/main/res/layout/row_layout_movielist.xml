@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cv_row_movielist_element"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
+    android:layout_height="wrap_content"
+    android:elevation="5dp"
+    android:layout_margin="8dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,17 +16,30 @@
             android:adjustViewBounds="true"
             android:scaleType="fitStart" />
         <TextView
-            android:id="@+id/text_row_movielist_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image_row_movielist"
-            android:visibility="gone" />
-        <TextView
             android:id="@+id/text_row_movielist_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/text_row_movielist_rating"
             android:layout_below="@+id/image_row_movielist"
-            android:visibility="gone" />
+            android:fontFamily="sans-serif"
+            android:textSize="@dimen/font_title_grid"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/text_row_movielist_title"
+            android:background="#3f1f4f"
+            android:id="@+id/line_movie_list"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/iv_icon_thumb"
+            android:src="@drawable/thumb"
+            android:layout_below="@+id/line_movie_list"/>
+        <TextView
+            android:id="@+id/text_row_movielist_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line_movie_list"
+            android:layout_toRightOf="@+id/iv_icon_thumb"
+            />
     </RelativeLayout>
 </android.support.v7.widget.CardView>
