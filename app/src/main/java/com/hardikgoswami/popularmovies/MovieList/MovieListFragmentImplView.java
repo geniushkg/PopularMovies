@@ -64,10 +64,10 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
         movieListPresenterInterface = new MovieListImplPresenter(this);
         mContext = getContext();
         movieEntitiesEmpty = new ArrayList<>();
-        moviesRecyclerAdapter = new MoviesRecyclerAdapter(movieEntitiesEmpty, mContext,movieListPresenterInterface);
+        moviesRecyclerAdapter = new MoviesRecyclerAdapter(movieEntitiesEmpty, mContext, movieListPresenterInterface);
         recyclerView.setAdapter(moviesRecyclerAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numOfColumnsForOrientation()));
-        if(PopularMovieApplication.isNetworkStatusAvialable(mContext)) {
+        if (PopularMovieApplication.isNetworkStatusAvialable(mContext)) {
             updateAdapterData();
         } else {
             showMessage("Internet Not Available , Please turn on Mobile Data");
@@ -99,23 +99,23 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
         movieEntitiesEmpty.addAll(movieEntitiesNew);
         moviesRecyclerAdapter.notifyDataSetChanged();
         boolean dualPane = false;
-        MovieEntity parcelMovie =(MovieEntity) movieEntitiesNew.get(0);
-        MovieListActivity movieListActivity =(MovieListActivity) getActivity();
-        if(movieListActivity!=null){
-             dualPane = movieListActivity.isDualPane();
+        MovieEntity parcelMovie = (MovieEntity) movieEntitiesNew.get(0);
+        MovieListActivity movieListActivity = (MovieListActivity) getActivity();
+        if (movieListActivity != null) {
+            dualPane = movieListActivity.isDualPane();
         }
-        if(dualPane){
-       // TODO : remove this comment
-            //     movieListActivity.updateUi(parcelMovie);
-            Toast.makeText(getContext(),"updates ui :"+parcelMovie.getOriginal_title(),Toast.LENGTH_SHORT).show();
+        if (dualPane) {
+            if (movieListActivity != null) {
+                movieListActivity.updateUi(parcelMovie);
+            }
         }
     }
 
     @Override
     public void navigateToMovieDetailsView(MovieEntity parcelMovie) {
         // we have movie details , just open new activity or adjust frags as per master details flow
-        MovieListActivity movieListActivity =(MovieListActivity) getActivity();
-        if(movieListActivity!=null){
+        MovieListActivity movieListActivity = (MovieListActivity) getActivity();
+        if (movieListActivity != null) {
             movieListActivity.updateUi(parcelMovie);
         }
     }
@@ -182,22 +182,22 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
         TOP_RATED, POPULAR, OFFLINE
     }
 
-    public int numOfColumnsForOrientation(){
+    public int numOfColumnsForOrientation() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int width = display.getWidth();
         int height = display.getHeight();
 
-        if(width<height){
+        if (width < height) {
             // portrait mode
             numOfColoums = 2;
-            if(width>600){
-                numOfColoums = 4;
+            if (width > 600) {
+                numOfColoums = 3;
             }
-        }
-        else{
-            numOfColoums = 3;
-            if(width>600){
-                numOfColoums = 2;
+        } else {
+            // landscape mode
+            numOfColoums = 4;
+            if (width > 600) {
+                numOfColoums = 5;
             }
         }
         return numOfColoums;

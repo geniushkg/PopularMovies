@@ -1,6 +1,11 @@
 package com.hardikgoswami.popularmovies.moviedetail;
 
+import android.content.ContentValues;
+
 import com.hardikgoswami.popularmovies.PopularMovieApplication;
+import com.hardikgoswami.popularmovies.util.db.MovieContentProvider;
+import com.hardikgoswami.popularmovies.util.db.MovieContract;
+import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import com.hardikgoswami.popularmovies.util.entity.MovieReview;
 import com.hardikgoswami.popularmovies.util.entity.MovieReviewResult;
 import com.hardikgoswami.popularmovies.util.entity.MovieTrailer;
@@ -18,7 +23,7 @@ import retrofit2.Response;
 public class MovieDetailService implements MovieDetailServieInterface {
 
     @Override
-    public void fetchReviewsFromSource(int movieId, final IListener<List<MovieReview>> callback) {
+    public void fetchReviewsFromSource(int movieId, final IListenerReviews<List<MovieReview>> callback) {
         Call<MovieReviewResult> movieReviewResultCall = PopularMovieApplication
                 .getsService()
                 .getReviewsOfMovie(movieId, PopularMovieApplication.TMDB_API_KEY);
@@ -41,7 +46,7 @@ public class MovieDetailService implements MovieDetailServieInterface {
     }
 
     @Override
-    public void fetchTrailerFromSource(int movieId, final IListener<List<MovieTrailer>> callback) {
+    public void fetchTrailerFromSource(int movieId, final IListenerTrailers<List<MovieTrailer>> callback) {
         Call<MovieTrailerResult> movieTrailerResultCall = PopularMovieApplication
                 .getsService()
                 .getTrailersOfMovie(movieId, PopularMovieApplication.TMDB_API_KEY);
@@ -62,4 +67,17 @@ public class MovieDetailService implements MovieDetailServieInterface {
             }
         });
     }
+
+    @Override
+    public void storeMovieToDb(MovieEntity favouriteMovie) {
+        ContentValues values = new ContentValues();
+        values.put(MovieContract.MOVIE_ID,favouriteMovie.getId());
+        values.put(MovieContract.TITLE_MOVIE,favouriteMovie.getTitle());
+        values.put(MovieContract.RELEASE_DATE,favouriteMovie.getRelease_date());
+        values.put(MovieContract.PLOT_MOVIE,favouriteMovie.getOverview());
+        values.put(MovieContract.VOTE_AVG_COLOUMN,favouriteMovie.getVote_average());
+        getContentResolver().insert(SampleContentProvider.Person.CONTENT_URI, values);
+    }
+
 }
+

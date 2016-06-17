@@ -25,16 +25,16 @@ public class MovieTrailerRecyclerAdapter extends RecyclerView.Adapter<MovieTrail
     Context mContext = null;
     iMovieDetailPresenter movieDetailPresenter;
 
-    public MovieTrailerRecyclerAdapter(List<MovieTrailer> movieTrailerList,iMovieDetailPresenter presenter){
+    public MovieTrailerRecyclerAdapter(List<MovieTrailer> movieTrailerList,Context context,iMovieDetailPresenter presenter){
         this.mMovieTrailer = movieTrailerList;
         this.movieDetailPresenter = presenter;
+        this.mContext = context;
     }
     @Override
-    public MovieTrailerRecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View movieTrailerView = inflater.inflate(R.layout.row_layout_movie_trailer,parent,false);
-        MovieTrailerRecyclerAdapter.ViewHolder viewHolder = new MovieTrailerRecyclerAdapter.ViewHolder(movieTrailerView);
+        ViewHolder viewHolder = new ViewHolder(movieTrailerView);
         return viewHolder;
     }
 
@@ -57,7 +57,7 @@ public class MovieTrailerRecyclerAdapter extends RecyclerView.Adapter<MovieTrail
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mMovieTrailer.size();
     }
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable

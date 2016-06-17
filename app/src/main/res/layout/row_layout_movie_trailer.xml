@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/youtube_trailer_video_width"
-    android:layout_height="@dimen/youtube_trailer_video_height">
+    android:layout_height="@dimen/youtube_trailer_video_height"
+    android:layout_margin="@dimen/recycler_view_review_margin">
 
     <ImageView
         android:id="@+id/iv_row_rv_movie_trailer_detail_frag"
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/iv_play_icon"
-        android:src="@drawable/play"
+        android:src="@drawable/play_mini_circle"
         android:layout_centerInParent="true"
         />
 </RelativeLayout>

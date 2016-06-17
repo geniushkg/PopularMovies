@@ -1,5 +1,6 @@
 package com.hardikgoswami.popularmovies.moviedetail;
 
+import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import com.hardikgoswami.popularmovies.util.entity.MovieReview;
 import com.hardikgoswami.popularmovies.util.entity.MovieTrailer;
 

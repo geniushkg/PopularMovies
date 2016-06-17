@@ -23,5 +23,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.hardikgoswami.popularmovies.movielist.MovieListActivity" />
         </activity>
+        <provider
+            android:authorities="com.hardikgoswami"
+            android:name="com.hardikgoswami.popularmovies.util.db.MovieContentProvider"/>
     </application>
 </manifest>

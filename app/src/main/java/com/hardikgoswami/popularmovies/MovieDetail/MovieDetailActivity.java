@@ -13,6 +13,7 @@ import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import org.parceler.Parcels;
 
 public class MovieDetailActivity extends AppCompatActivity {
+    public static final String D_TAG = "DETAIL_FRAG";
     MovieEntity movieEntity;
     MovieDetailFragmentImpView movieDetailFragmentImpView = new MovieDetailFragmentImpView();
     @Override
@@ -20,17 +21,16 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        movieEntity = (MovieEntity)  Parcels.unwrap(getIntent().getParcelableExtra("movieParcel"));
-        Bundle data = new Bundle();
-        data.putInt("detailActivityState",1);
-        movieDetailFragmentImpView.setArguments(data);
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.movie_detail_container_activity,movieDetailFragmentImpView)
-                .commit();
+        if(savedInstanceState == null){
+            movieEntity = (MovieEntity)  Parcels.unwrap(getIntent().getParcelableExtra("movieParcel"));
+            movieDetailFragmentImpView.setParceldata(movieEntity);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.movie_detail_container_activity,movieDetailFragmentImpView,D_TAG)
+                    .commit();
 
-    }
-    public MovieEntity getMovieEntity(){
-        return movieEntity;
+        }else {
+            movieDetailFragmentImpView = (MovieDetailFragmentImpView) getSupportFragmentManager().findFragmentByTag(D_TAG);
+        }
     }
 
     @Override

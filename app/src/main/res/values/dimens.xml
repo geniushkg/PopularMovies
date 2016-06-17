@@ -4,4 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="youtube_trailer_video_height">160dp</dimen>
     <dimen name="youtube_trailer_video_width">200dp</dimen>
+    <dimen name="font_size">25sp</dimen>
+    <dimen name="recycler_view_review_margin">10dp</dimen>
+    <dimen name="recycler_view_review_height">160dp</dimen>
 </resources>

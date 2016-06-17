@@ -1,16 +1,15 @@
 package com.hardikgoswami.popularmovies.moviedetail;
 
+import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 import com.hardikgoswami.popularmovies.util.entity.MovieReview;
 import com.hardikgoswami.popularmovies.util.entity.MovieTrailer;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by geniushkg on 6/15/2016.
  */
-public class MovieDetailImplPresenter implements iMovieDetailPresenter,IListener  {
+public class MovieDetailImplPresenter implements iMovieDetailPresenter,IListenerReviews<List<MovieReview>>,IListenerTrailers<List<MovieTrailer>> {
     iMovieDetailView movieDetailView;
     MovieDetailServieInterface movieDetailServieInterface;
     MovieDetailImplPresenter( iMovieDetailView movieDetailView ){
@@ -34,19 +33,24 @@ public class MovieDetailImplPresenter implements iMovieDetailPresenter,IListener
         movieDetailView.playTrailer(key);
     }
 
+    @Override
+    public void storeMovieToDb(MovieEntity favouriteMovie) {
+
+    }
+
 
     @Override
-    public void onSuccessReviews(Object o) {
-        movieDetailView.showReviews((List<MovieReview>) o);
+    public void onSuccessReviews(List<MovieReview> movieReviews) {
+        movieDetailView.showReviews(movieReviews);
     }
 
     @Override
-    public void onSuccessTrailers(Object o) {
-        movieDetailView.showTrailers((List<MovieTrailer>) o);
+    public void onSuccessTrailers(List<MovieTrailer> movieTrailerList) {
+        movieDetailView.showTrailers(movieTrailerList);
     }
 
     @Override
     public void onFailure(String errorMessage) {
-
+        movieDetailView.showMessage(errorMessage);
     }
 }

@@ -1,10 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.hardikgoswami.popularmovies.moviedetail.MovieDetailFragmentImpView">
 
     <com.melnykov.fab.ObservableScrollView
@@ -38,44 +37,50 @@
                         android:id="@+id/tv_movie_detail_frag_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/iv_movie_detail"
-                        android:text="@string/app_name" />
+                        android:layout_margin="4dp"
+                        android:layout_toRightOf="@+id/iv_movie_detail"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/app_name"
+                        android:textSize="@dimen/font_size" />
 
                     <View
                         android:id="@+id/line_title"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_alignRight="@+id/iv_movie_detail"
+                        android:layout_height="1dp"
+                        android:layout_below="@+id/tv_movie_detail_frag_title"
+                        android:layout_toRightOf="@+id/iv_movie_detail"
                         android:background="#3f1f4f" />
 
                     <ImageView
                         android:id="@+id/iv_icon_rating_movie_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/iv_movie_detail"
                         android:layout_below="@+id/line_title"
-                        android:src="@drawable/hot" />
+                        android:layout_margin="4dp"
+                        android:layout_toRightOf="@+id/iv_movie_detail"
+                        android:src="@drawable/thumb" />
 
                     <TextView
                         android:id="@+id/tv_movie_detail_frag_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@id/iv_icon_rating_movie_detail"
-                        android:layout_below="@+id/line_title" />
+                        android:layout_below="@+id/line_title"
+                        android:layout_margin="4dp"
+                        android:layout_toRightOf="@id/iv_icon_rating_movie_detail" />
 
                     <View
                         android:id="@+id/line_date"
                         android:layout_width="match_parent"
-                        android:layout_height="2dp"
-                        android:layout_alignRight="@+id/iv_movie_detail"
+                        android:layout_height="1dp"
+                        android:layout_toRightOf="@+id/iv_movie_detail"
                         android:background="#3f1f4f" />
 
                     <ImageView
                         android:id="@+id/iv_icon_date_movie_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignRight="@+id/iv_movie_detail"
-                        android:layout_below="@+id/line_date"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toRightOf="@+id/iv_movie_detail"
                         android:src="@drawable/calender" />
 
                     <TextView
@@ -83,7 +88,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_alignRight="@+id/iv_icon_date_movie_detail" />
+                        android:layout_toRightOf="@+id/iv_icon_date_movie_detail"
+                        android:paddingBottom="4dp"
+                        android:text="@string/app_name" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
 
@@ -107,26 +114,22 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
                         android:text="@string/tv_trailer"
-                        android:textSize="35sp" />
+                        android:textSize="@dimen/font_size" />
 
                     <View
                         android:id="@+id/line_lv_trailer"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_alignRight="@+id/iv_movie_detail"
-                        android:layout_margin="4dp"
                         android:background="#3f1f4f" />
-
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_movie_trailers_detail_frag"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="@dimen/youtube_trailer_video_height" />
 
                     <View
                         android:id="@+id/line_share"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_alignRight="@+id/iv_movie_detail"
                         android:layout_margin="4dp"
                         android:background="#3f1f4f" />
 
@@ -134,7 +137,7 @@
                         android:id="@+id/iv_share_movie_trailer_detail_frag"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/share" />
+                        android:src="@drawable/share_med" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -157,13 +160,12 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
                         android:text="@string/tv_plot"
-                        android:textSize="35sp" />
+                        android:textSize="@dimen/font_size" />
 
                     <View
                         android:id="@+id/line_plot"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_alignRight="@+id/iv_movie_detail"
                         android:layout_margin="4dp"
                         android:background="#3f1f4f" />
 
@@ -174,17 +176,53 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_movie_review"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:elevation="5dp"
+                card_view:contentPadding="10dp">
 
-            <com.melnykov.fab.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|right"
-                android:layout_margin="16dp"
-                android:src="@drawable/like"
-                fab:fab_colorNormal="@color/colorPrimary"
-                fab:fab_colorPressed="@color/colorPrimaryDark"
-                fab:fab_colorRipple="@color/colorAccent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_review_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/tv_reviews"
+                        android:textSize="@dimen/font_size" />
+
+                    <View
+                        android:id="@+id/line_review"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_margin="4dp"
+                        android:background="#3f1f4f" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_movie_review_detail_frag"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/recycler_view_review_height" />
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </com.melnykov.fab.ObservableScrollView>
-</LinearLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@drawable/like"
+        fab:fab_colorNormal="@color/colorAccent"
+        fab:fab_colorPressed="@color/colorPrimary"
+        fab:fab_colorRipple="@color/colorPrimaryDark" />
+</RelativeLayout>

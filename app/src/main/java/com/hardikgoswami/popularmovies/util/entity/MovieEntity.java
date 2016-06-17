@@ -15,7 +15,6 @@ import java.util.Map;
 @Parcel
 public class MovieEntity {
 
-
     private String poster_path;
     private Boolean adult;
     private String overview;
@@ -30,7 +29,6 @@ public class MovieEntity {
     private Integer vote_count;
     private Boolean video;
     private Double vote_average;
-
 
     /**
      *
