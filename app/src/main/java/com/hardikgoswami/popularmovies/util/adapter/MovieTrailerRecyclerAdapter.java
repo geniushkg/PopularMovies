@@ -26,6 +26,7 @@ public class MovieTrailerRecyclerAdapter extends RecyclerView.Adapter<MovieTrail
     iMovieDetailPresenter movieDetailPresenter;
 
     public MovieTrailerRecyclerAdapter(List<MovieTrailer> movieTrailerList,Context context,iMovieDetailPresenter presenter){
+        super();
         this.mMovieTrailer = movieTrailerList;
         this.movieDetailPresenter = presenter;
         this.mContext = context;

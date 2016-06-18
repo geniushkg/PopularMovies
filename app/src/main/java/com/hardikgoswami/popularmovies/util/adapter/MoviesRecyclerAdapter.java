@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +17,8 @@ import android.view.ViewGroup;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by geniushkg on 6/12/2016.
- */
-public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
-
+public class MoviesRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
+    public static final String TAG = MovieReviewRecyclerAdapter.class.getSimpleName();
     List<MovieEntity> movieEntityList = Collections.emptyList();
     Context context;
     iMovieListPresenter movieListPresenter;
@@ -33,30 +31,33 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
     }
 
     @Override
-    public view_holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout_movielist, parent, false);
-        view_holder view_holder = new view_holder(v);
-        return view_holder;
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(view_holder holder, final int position) {
-        holder.title.setText(movieEntityList.get(position).getTitle());
-        holder.rating.setText(String.valueOf(movieEntityList.get(position).getVote_count()));
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        final MovieEntity movieEntity = movieEntityList.get(holder.getAdapterPosition());
+
+        String title = movieEntity.getTitle();
+        String rating = String.valueOf(movieEntity.getVote_count());
+        Log.d(TAG, "onBindViewHolder: MovieEntity: " + movieEntity.toString());
+        holder.title.setText(title);
+        holder.rating.setText(rating);
         if (movieEntityList.get(position).getPoster_path() != null) {
-            String poster_url = "http://image.tmdb.org/t/p/w185" + movieEntityList.get(position).getPoster_path();
+            String poster_url = "http://image.tmdb.org/t/p/w185" + movieEntity.getPoster_path();
             Picasso.with(context)
                     .load(poster_url)
                     .into(holder.poster);
         } else {
-            Bitmap b = DbBitmapUtility.getImage(movieEntityList.get(position).getPoster_blob());
+            Bitmap b = DbBitmapUtility.getImage(movieEntity.getPoster_blob());
             holder.poster.setImageBitmap(b);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parcleMovie = (MovieEntity) movieEntityList.get(position);
-                movieListPresenter.navigateToMovieDetail(parcleMovie);
+                movieListPresenter.navigateToMovieDetail(movieEntity);
             }
         });
 
@@ -65,7 +66,6 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<view_holder> {
 
     @Override
     public int getItemCount() {
-        int count = movieEntityList.size();
-        return count;
+        return movieEntityList.size();
     }
 }

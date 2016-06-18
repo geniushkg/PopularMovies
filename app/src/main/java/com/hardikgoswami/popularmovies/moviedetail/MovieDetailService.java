@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.hardikgoswami.popularmovies.PopularMovieApplication;
 import com.hardikgoswami.popularmovies.movielist.IListener;
@@ -21,10 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by geniushkg on 6/16/2016.
- */
 public class MovieDetailService implements MovieDetailServieInterface {
+    public static final String TAG = MovieDetailService.class.getSimpleName();
 
     @Override
     public void fetchReviewsFromSource(int movieId, final IListenerReviews<List<MovieReview>> callback) {
@@ -74,8 +73,8 @@ public class MovieDetailService implements MovieDetailServieInterface {
 
 
     @Override
-    public void storeMovieToDb(MovieEntity favouriteMovie, Bitmap poster, Context context , IListener callback) {
-        if (checkMovie(favouriteMovie,context)) {
+    public void storeMovieToDb(MovieEntity favouriteMovie, Bitmap poster, Context context, IListener callback) {
+        if (!isFavAlreadyMovie(favouriteMovie, context)) {
             ContentValues values = new ContentValues();
             values.put(MovieContract.MOVIE_ID, favouriteMovie.getId());
             values.put(MovieContract.TITLE_MOVIE, favouriteMovie.getTitle());
@@ -90,15 +89,13 @@ public class MovieDetailService implements MovieDetailServieInterface {
         }
     }
 
-    boolean checkMovie(MovieEntity favouriteMovie,Context context) {
+    boolean isFavAlreadyMovie(MovieEntity favouriteMovie, Context context) {
         String[] column = new String[]{"title_movie"};
         String titleToBeSearch = favouriteMovie.getTitle();
-        Cursor mCursor =  context.getContentResolver()
-                .query(MovieContract.CONTENT_URI,column, "title_movie LIKE ?", new String[]{titleToBeSearch}, null);
-        if(mCursor == null){
-            return true;
-        }
-        return false;
+        Cursor c = context.getContentResolver()
+                .query(MovieContract.CONTENT_URI, column, "title_movie = ?", new String[]{titleToBeSearch}, null);
+        assert c != null;
+        return c.getCount() > 0;
     }
 
 

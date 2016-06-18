@@ -11,9 +11,6 @@ import com.hardikgoswami.popularmovies.R;
 import com.hardikgoswami.popularmovies.util.entity.MovieReview;
 import java.util.List;
 
-/**
- * Created by geniushkg on 6/17/2016.
- */
 public class MovieReviewRecyclerAdapter extends RecyclerView.Adapter<MovieReviewRecyclerAdapter.ViewHolder> {
 
     List<MovieReview> movieReviewList;
@@ -26,10 +23,8 @@ public class MovieReviewRecyclerAdapter extends RecyclerView.Adapter<MovieReview
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-        View movieReviewView = inflater.inflate(R.layout.row_layout_movie_review, parent, false);
-        ViewHolder viewHolder = new ViewHolder(movieReviewView);
-        return viewHolder;
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_layout_movie_review, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -48,13 +43,10 @@ public class MovieReviewRecyclerAdapter extends RecyclerView.Adapter<MovieReview
         public TextView tv_author_review, tv_content_review;
 
         public ViewHolder(View itemView) {
-            // Stores the itemView in a public final member variable that can be used
-            // to access the context from any ViewHolder instance.
-
             super(itemView);
+
             tv_author_review = (TextView) itemView.findViewById(R.id.tv_movie_review_author);
             tv_content_review = (TextView) itemView.findViewById(R.id.tv_movie_review_content);
-
         }
     }
 }

@@ -14,7 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:scaleType="fitStart" />
+            android:scaleType="fitStart"
+            android:contentDescription="@string/image_poster" />
         <TextView
             android:id="@+id/text_row_movielist_title"
             android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/iv_icon_thumb"
             android:src="@drawable/thumb"
-            android:layout_below="@+id/line_movie_list"/>
+            android:layout_below="@+id/line_movie_list"
+            android:contentDescription="@string/tumb_image_rating" />
         <TextView
             android:id="@+id/text_row_movielist_rating"
             android:layout_width="wrap_content"

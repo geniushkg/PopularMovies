@@ -10,14 +10,11 @@ import com.hardikgoswami.popularmovies.R;
 
 import butterknife.BindView;
 
-/**
- * Created by geniushkg on 6/12/2016.
- */
-public class view_holder extends RecyclerView.ViewHolder {
+public class ViewHolder extends RecyclerView.ViewHolder {
     CardView cv;
     TextView rating,title;
     ImageView poster;
-    public view_holder(View itemView) {
+    public ViewHolder(View itemView) {
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cv_row_movielist_element);
         poster = (ImageView) itemView.findViewById(R.id.image_row_movielist);

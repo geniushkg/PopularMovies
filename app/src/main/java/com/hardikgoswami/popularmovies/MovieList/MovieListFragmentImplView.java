@@ -195,9 +195,9 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
             }
         } else {
             // landscape mode
-            numOfColoums = 4;
+            numOfColoums = 3;
             if (width > 600) {
-                numOfColoums = 5;
+                numOfColoums = 3;
             }
         }
         return numOfColoums;

@@ -14,22 +14,23 @@ import org.parceler.Parcels;
 
 public class MovieDetailActivity extends AppCompatActivity {
     public static final String D_TAG = "DETAIL_FRAG";
-    MovieEntity movieEntity;
-    MovieDetailFragmentImpView movieDetailFragmentImpView = new MovieDetailFragmentImpView();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        if(savedInstanceState == null){
-            movieEntity = (MovieEntity)  Parcels.unwrap(getIntent().getParcelableExtra("movieParcel"));
-            movieDetailFragmentImpView.setParceldata(movieEntity);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.movie_detail_container_activity,movieDetailFragmentImpView,D_TAG)
-                    .commit();
 
-        }else {
-            movieDetailFragmentImpView = (MovieDetailFragmentImpView) getSupportFragmentManager().findFragmentByTag(D_TAG);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        if(savedInstanceState == null){
+            MovieEntity movieEntity = Parcels.unwrap(getIntent().getParcelableExtra("movieParcel"));
+            MovieDetailFragmentImpView movieDetailView = MovieDetailFragmentImpView.getInstance(movieEntity);
+
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.movie_detail_container_activity, movieDetailView, D_TAG)
+                    .commit();
         }
     }
 
@@ -38,12 +39,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()){
             case R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+
                 break;
             default:
+                NavUtils.navigateUpFromSameTask(this);
                 Toast.makeText(this,"up button pressed",Toast.LENGTH_SHORT).show();
         }
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

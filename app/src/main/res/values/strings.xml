@@ -8,4 +8,6 @@
     <string name="tv_trailer">Trailers</string>
     <string name="tv_plot">Plot</string>
     <string name="tv_reviews">Reviews</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="tumb_image_rating">Tumb Image Rating</string>
 </resources>

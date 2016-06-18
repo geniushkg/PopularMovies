@@ -4,6 +4,7 @@ package com.hardikgoswami.popularmovies.util.entity;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -291,5 +292,24 @@ public class MovieEntity {
         this.vote_average = vote_average;
     }
 
-
+    @Override
+    public String toString() {
+        return "MovieEntity{" +
+                "poster_path='" + poster_path + '\'' +
+                ", adult=" + adult +
+                ", overview='" + overview + '\'' +
+                ", release_date='" + release_date + '\'' +
+                ", genre_ids=" + genre_ids +
+                ", id=" + id +
+                ", original_title='" + original_title + '\'' +
+                ", original_language='" + original_language + '\'' +
+                ", title='" + title + '\'' +
+                ", backdrop_path='" + backdrop_path + '\'' +
+                ", popularity=" + popularity +
+                ", vote_count=" + vote_count +
+                ", video=" + video +
+                ", vote_average=" + vote_average +
+                ", poster_blob=" + Arrays.toString(poster_blob) +
+                '}';
+    }
 }
