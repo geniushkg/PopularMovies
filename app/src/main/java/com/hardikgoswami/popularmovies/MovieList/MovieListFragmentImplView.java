@@ -48,7 +48,6 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
     MoviesRecyclerAdapter moviesRecyclerAdapter;
     Context mContext;
     List<MovieEntity> movieEntitiesEmpty;
-    int numOfColoums = 2;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +70,7 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
             updateAdapterData();
         } else {
             showMessage("Internet Not Available , Please turn on Mobile Data");
+            showMessage("Select Favourite from top menu to see favourite movies");
         }
         return rootView;
     }
@@ -186,7 +186,7 @@ public class MovieListFragmentImplView extends Fragment implements iMovieListVie
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int width = display.getWidth();
         int height = display.getHeight();
-
+        int numOfColoums = 0;
         if (width < height) {
             // portrait mode
             numOfColoums = 2;

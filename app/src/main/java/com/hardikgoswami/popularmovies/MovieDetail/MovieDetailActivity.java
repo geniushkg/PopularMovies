@@ -43,7 +43,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 break;
             default:
                 NavUtils.navigateUpFromSameTask(this);
-                Toast.makeText(this,"up button pressed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"id is : "+item.getItemId(),Toast.LENGTH_SHORT).show();
         }
         return true;
     }
