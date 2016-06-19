@@ -5,17 +5,14 @@ import com.hardikgoswami.popularmovies.R;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.hardikgoswami.popularmovies.moviedetail.MovieDetailActivity;
 import com.hardikgoswami.popularmovies.moviedetail.MovieDetailFragmentImpView;
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 
 import org.parceler.Parcels;
-
-import butterknife.BindView;
-import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class MovieListActivity extends AppCompatActivity {
     private boolean mIsDualPane;

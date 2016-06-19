@@ -42,7 +42,6 @@ public class MoviesRecyclerAdapter extends RecyclerView.Adapter<ViewHolder> {
 
         String title = movieEntity.getTitle();
         String rating = String.valueOf(movieEntity.getVote_count());
-        Log.d(TAG, "onBindViewHolder: MovieEntity: " + movieEntity.toString());
         holder.title.setText(title);
         holder.rating.setText(rating);
         if (movieEntityList.get(position).getPoster_path() != null) {

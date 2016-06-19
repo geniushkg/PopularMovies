@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +24,6 @@ import com.hardikgoswami.popularmovies.util.adapter.MoviesRecyclerAdapter;
 import com.hardikgoswami.popularmovies.util.entity.MovieEntity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;

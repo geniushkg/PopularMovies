@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +29,8 @@ import com.hardikgoswami.popularmovies.util.entity.MovieTrailer;
 import com.melnykov.fab.FloatingActionButton;
 import com.melnykov.fab.ObservableScrollView;
 import com.squareup.picasso.Picasso;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,12 +79,12 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
     TextView rv_review_title;
     @BindView(R.id.tv_trailer_title)
     TextView tv_trailer_title;
-
+    Bitmap mBitmap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        setRetainInstance(true);
+        //setRetainInstance(true);
         View rootView = inflater.inflate(R.layout.fragment_movie_detail_fragment_imp_view, container, false);
         ButterKnife.bind(this, rootView);
         mContext = getContext();
@@ -99,7 +100,7 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
         movieReviewList = new ArrayList<>();
         movieReviewRecyclerAdapter = new MovieReviewRecyclerAdapter(movieReviewList, mContext);
         rv_movie_reviews.setLayoutManager(new LinearLayoutManager(mContext));
-
+        rv_movie_reviews.setAdapter(movieReviewRecyclerAdapter);
 
         String htmlText = " %s ";
         String movie_plot = "this is movie plot";
@@ -107,27 +108,38 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
         wv_plot.loadData(String.format(htmlText, movie_plot), "text/html", "utf-8");
         floatingActionButton.attachToScrollView(scrollView);
 
-        final MovieEntity localMovieEntity = getParceldata();
-        tv_movie_title.setText(localMovieEntity.getTitle());
-        tv_movie_rating.setText(String.valueOf(localMovieEntity.getVote_average()));
-        tv_movie_release_date.setText(localMovieEntity.getRelease_date());
-        if (localMovieEntity.getPoster_path() != null) {
-            Picasso.with(getContext())
-                    .load(POSTER_URL + localMovieEntity.getPoster_path())
-                    .into(iv_movie_poster);
-        } else {
-            Bitmap b = DbBitmapUtility.getImage(localMovieEntity.getPoster_blob());
-            iv_movie_poster.setImageBitmap(b);
-        }
-        movie_plot_data = localMovieEntity.getOverview();
-        wv_plot.loadData(String.format(htmlText, movie_plot_data), "text/html", "utf-8");
+        if (getParceldata() != null) {
 
-        movieDetailPresenter.fetchTrailers(localMovieEntity.getId());
-        movieDetailPresenter.fetchReviews(localMovieEntity.getId());
-        final Bitmap bitmap = ((BitmapDrawable) iv_movie_poster.getDrawable()).getBitmap();
+            final MovieEntity localMovieEntity = getParceldata();
+            tv_movie_title.setText(localMovieEntity.getTitle());
+            tv_movie_rating.setText(String.valueOf(localMovieEntity.getVote_average()));
+            tv_movie_release_date.setText(localMovieEntity.getRelease_date());
+            if (localMovieEntity.getPoster_path() != null) {
+                Picasso.with(getContext())
+                        .load(POSTER_URL + localMovieEntity.getPoster_path())
+                        .into(iv_movie_poster);
+            } else {
+                Bitmap b = DbBitmapUtility.getImage(localMovieEntity.getPoster_blob());
+                iv_movie_poster.setImageBitmap(b);
+            }
+            movie_plot_data = localMovieEntity.getOverview();
+            wv_plot.loadData(String.format(htmlText, movie_plot_data), "text/html", "utf-8");
+
+            movieDetailPresenter.fetchTrailers(localMovieEntity.getId());
+            movieDetailPresenter.fetchReviews(localMovieEntity.getId());
+            mBitmap = ((BitmapDrawable) iv_movie_poster.getDrawable()).getBitmap();
+
+        }
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bitmap bitmap = ((BitmapDrawable) iv_movie_poster.getDrawable()).getBitmap();
+                if (localMovieEntity == null)
+                    throw new NullPointerException("Local Movie Entity null");
+                if (bitmap == null)
+                    throw new NullPointerException("Bitmap null");
+                if (mContext == null)
+                    throw new NullPointerException("Context null");
                 movieDetailPresenter.storeMovieToDb(localMovieEntity, bitmap, mContext);
             }
         });
@@ -135,6 +147,7 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
     }
 
     public void displayMovieData(MovieEntity parceldata) {
+        setParceldata(parceldata);
         tv_movie_title.setText(parceldata.getTitle());
         tv_movie_rating.setText(String.valueOf(parceldata.getVote_average()));
         tv_movie_release_date.setText(parceldata.getRelease_date());
@@ -150,7 +163,7 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
         wv_plot.loadData(String.format(htmlText, movie_plot_data), "text/html", "utf-8");
         if (parceldata.getPoster_path() != null) {
             movieDetailPresenter.fetchTrailers(parceldata.getId());
-            movieDetailPresenter.fetchReviews(localMovieEntity.getId());
+            movieDetailPresenter.fetchReviews(parceldata.getId());
         }
     }
 
@@ -163,8 +176,8 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
             rv_review_title.setText("0 - Reviews");
             rv_movie_reviews.setVisibility(View.GONE);
         }
-        showMessage("list size : " + movieReviewList.size());
-        showMessage("adapter size : " + movieReviewRecyclerAdapter.getItemCount());
+        /*showMessage("list size : " + movieReviewList.size());
+        showMessage("adapter size : " + movieReviewRecyclerAdapter.getItemCount());*/
     }
 
     @Override
@@ -175,10 +188,11 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
         iv_share_movie_trailer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String toShare = "http://www.youtube.com/watch?v="+movieTrailerList.get(0).getKey();
-                Intent shareIntent = new Intent(); shareIntent.setAction(Intent.ACTION_SEND);
+                String toShare = "http://www.youtube.com/watch?v=" + movieTrailerList.get(0).getKey();
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
-                shareIntent.putExtra(Intent.EXTRA_TEXT, toShare );
+                shareIntent.putExtra(Intent.EXTRA_TEXT, toShare);
                 startActivity(Intent.createChooser(shareIntent, "Share via"));
             }
         });
@@ -201,7 +215,6 @@ public class MovieDetailFragmentImpView extends Fragment implements iMovieDetail
     public void showMessage(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
-
 
     public MovieEntity getParceldata() {
         return localMovieEntity;
